@@ -71,3 +71,5 @@ deploy:
   type: git
   repo: https://github.com/yvonnevv/yvonnevv.github.io.git
   branch: master
+
+disqus_shortname: https-yvonnevv-github-io

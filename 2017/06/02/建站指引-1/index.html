@@ -132,6 +132,11 @@
 
 
 
+
+
+
+
+
   <link rel="canonical" href="http://yoursite.com/2017/06/02/建站指引-1/"/>
 
 
@@ -429,6 +434,20 @@
           
   <div class="comments" id="comments">
     
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+      var gitment = new Gitment({
+        owner: 'yvonnevv',
+        repo: 'yvonnevv.github.io.git',
+        oauth: {
+          client_id: 'd9a9254eceded2237e25',
+          client_secret: '6f2d6f528121b88630fbaa03c1f8c7e6f9a0b204',
+        },
+      })
+      gitment.render('comments')
+    </script>
+    
   </div>
 
 
@@ -492,15 +511,6 @@
             </div>
           
 
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
           
 
         </nav>

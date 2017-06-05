@@ -1,8 +1,9 @@
 ---
-title: 小白的 Hexo + Github 建站指引
+title: 小白的 Hexo + Github - 建站指引
 date: 2017-06-02 10:34:01
 categories: 前端
 comments: true
+articleId: buildblog-1
 ---
 本文是有关Hexo+Github建站的基础流程，抛除相关技术深入探研，根据本文指引能迅速搭建一个基本的博客空间。这篇文章能为你解决下面的问题：
 1. 迅速建站

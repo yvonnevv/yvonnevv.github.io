@@ -1,0 +1,747 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="根据建站指引1的步骤，我们搭建了一个最基本的个人博客。本人使用atom编辑器自带的markdown系统进行写作，结合atom的markdown插件，能给我们带来更舒畅的写作体验。同时，给我们的博客添加第三方服务集成能使我们站点功能得到扩展。这篇文章能为你解决下面的问题：  简化 Markdown 贴图流程 其他 Atom Markdown 插件 集成 Gitment 评论系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="打造更健全的博客空间 - 建站指引2">
+<meta property="og:url" content="http://yoursite.com/2017/06/05/buildbolg-2/index.html">
+<meta property="og:site_name" content="清风自来">
+<meta property="og:description" content="根据建站指引1的步骤，我们搭建了一个最基本的个人博客。本人使用atom编辑器自带的markdown系统进行写作，结合atom的markdown插件，能给我们带来更舒畅的写作体验。同时，给我们的博客添加第三方服务集成能使我们站点功能得到扩展。这篇文章能为你解决下面的问题：  简化 Markdown 贴图流程 其他 Atom Markdown 插件 集成 Gitment 评论系统">
+<meta property="og:image" content="http://oqwh8w9hs.bkt.clouddn.com/markdown-img-paste-2017060517125265.png">
+<meta property="og:image" content="http://oqwh8w9hs.bkt.clouddn.com/test.gif">
+<meta property="og:image" content="http://oqwh8w9hs.bkt.clouddn.com/markdown-img-paste-20170605182754871.png">
+<meta property="og:updated_time" content="2017-06-05T10:28:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="打造更健全的博客空间 - 建站指引2">
+<meta name="twitter:description" content="根据建站指引1的步骤，我们搭建了一个最基本的个人博客。本人使用atom编辑器自带的markdown系统进行写作，结合atom的markdown插件，能给我们带来更舒畅的写作体验。同时，给我们的博客添加第三方服务集成能使我们站点功能得到扩展。这篇文章能为你解决下面的问题：  简化 Markdown 贴图流程 其他 Atom Markdown 插件 集成 Gitment 评论系统">
+<meta name="twitter:image" content="http://oqwh8w9hs.bkt.clouddn.com/markdown-img-paste-2017060517125265.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/05/buildbolg-2/"/>
+
+
+
+
+
+  <title>打造更健全的博客空间 - 建站指引2 | 清风自来</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">清风自来</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">May the force be with you</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/05/buildbolg-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yvonne Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="清风自来">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">打造更健全的博客空间 - 建站指引2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-05T14:16:20+08:00">
+                2017-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>根据建站指引1的步骤，我们搭建了一个最基本的个人博客。本人使用atom编辑器自带的markdown系统进行写作，结合atom的markdown插件，能给我们带来更舒畅的写作体验。同时，给我们的博客添加第三方服务集成能使我们站点功能得到扩展。这篇文章能为你解决下面的问题：</p>
+<ol>
+<li>简化 Markdown 贴图流程</li>
+<li>其他 Atom Markdown 插件</li>
+<li>集成 Gitment 评论系统</li>
+</ol>
+<a id="more"></a>
+<h2 id="Atom-Markdown-优化插件"><a href="#Atom-Markdown-优化插件" class="headerlink" title="Atom Markdown 优化插件"></a>Atom Markdown 优化插件</h2><h3 id="1-使用快捷键插入截图"><a href="#1-使用快捷键插入截图" class="headerlink" title="1. 使用快捷键插入截图"></a>1. 使用快捷键插入截图</h3><p>在使用hexo时，我们可以使用网图或者本地图来作为文章图片的引用。而当我们想直接在文章中使用截图时，一般需要经过如下几个步骤：</p>
+<ul>
+<li>截图</li>
+<li>上传至图床</li>
+<li>将图床markdown代码插入文章中</li>
+</ul>
+<p>由此看来，插入截图时比较繁琐的，而我们希望的是截图之后能直接快捷键将其贴入我们的文章中。查阅了几篇文章，最后决定使用atom的插件<code>markdown-img-paste</code>（贴图快捷键为<code>ctrl+shift+v</code>）。</p>
+<blockquote>
+<p>如非使用atom编辑器，请参考以下两篇相似内容文章<br><a href="http://jverson.com/2017/05/28/qiniu-image-v2/" target="_blank" rel="external">windows版本markdown一键贴图工具</a><br><a href="http://jverson.com/2017/04/28/alfred-qiniu-upload/" target="_blank" rel="external">Mac版本使用alfred在markdown中愉快的贴图</a></p>
+</blockquote>
+<p>回到上文内容，<code>markdown-img-paste</code>支持直接截图上传至七牛图床和上传至本地文件夹。但是如果选择本地储存的话，是直接将图片存入assets文件夹再进行引用的，而hexo的图片资源需要souces/images下。所以我将其直接上传至七牛云。下载并安装好该插件后，对此进行七牛云的授权和设置。对于没有七牛云账号的同学们，可以到<a href="https://portal.qiniu.com/create" target="_blank" rel="external">七牛云</a>申请一个账号，<strong>并创建储存空间</strong>。</p>
+<p>调出Preferences窗口，找到<code>markdown-img-paste</code>package进行设置。配置如下：<br><img src="http://oqwh8w9hs.bkt.clouddn.com/markdown-img-paste-2017060517125265.png" alt=""></p>
+<p>提一下几个参数：</p>
+<ol>
+<li>首先得勾选 use qiniu for image link 使用七牛云储存图片</li>
+<li>accesskey 和 secretkey 是我们七牛账号的两个唯一秘钥，可在<em>个人面板-密钥管理</em>中查看</li>
+<li>bucket 是我们创建的储存空间的名称</li>
+<li>domain 是我们储存空间的域名</li>
+<li>uphost 默认是华东的存储空间即 up.qiniu.com<br>华北的存储空间 使用 up-z1.qiniu.com<br>华南的存储空间 使用 up-z2.qiniu.com<br>（这里没注意到这个有可能会报错）</li>
+</ol>
+<p>设置好之后，就可以愉快地截图&gt;一键粘贴&gt;上传 啦～（注意一下，gif是没有办法直接粘贴上传的）</p>
+<p><img src="http://oqwh8w9hs.bkt.clouddn.com/test.gif" alt=""></p>
+<h3 id="2-其他优化markdown写作体验插件"><a href="#2-其他优化markdown写作体验插件" class="headerlink" title="2. 其他优化markdown写作体验插件"></a>2. 其他优化markdown写作体验插件</h3><p>我是好文章的搬运工。。。 (。・`ω´・)<br><a href="http://www.cnblogs.com/fanzhidongyzby/p/6637084.html" target="_blank" rel="external">使用Atom打造无懈可击的Markdown编辑器</a></p>
+<h2 id="集成Gitment评论系统"><a href="#集成Gitment评论系统" class="headerlink" title="集成Gitment评论系统"></a>集成Gitment评论系统</h2><p>多说倒闭了，想必大家都了解过。比对了市面上几款评论系统，觉得他们外观都不太简约，或者色调和我选择的主题不相符。而口碑比较好的disqu则在国内会被墙掉。所以，这里选了一款较新的评论系统<a href="https://imsun.net/posts/gitment-introduction/" target="_blank" rel="external">gitment</a>。<br>如何将gitment嵌入hexo的主题中，是下文将要讨论的问题，对于gitment的其他Api，请自行查阅gitment的readme。</p>
+<h3 id="1-注册-OAuth-Application"><a href="#1-注册-OAuth-Application" class="headerlink" title="1. 注册 OAuth Application"></a>1. 注册 OAuth Application</h3><p>首先得注册一个OAuth Application，并获得client_id和secret_id。<a href="https://github.com/settings/applications/new" target="_blank" rel="external">传送门</a></p>
+<h3 id="2-在配置文件添加gitment支持"><a href="#2-在配置文件添加gitment支持" class="headerlink" title="2. 在配置文件添加gitment支持"></a>2. 在配置文件添加gitment支持</h3><p>找到主题文件下的_config.yml，自行添加字段：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gitment: <span class="keyword">true</span></div></pre></td></tr></table></figure></p>
+<h3 id="3-在comments文件中加入gitment配置"><a href="#3-在comments文件中加入gitment配置" class="headerlink" title="3. 在comments文件中加入gitment配置"></a>3. 在comments文件中加入gitment配置</h3><p>找到 主题/layout/_partials/comments.swig（也可能不是swig文件，但逻辑是类似的），加入代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;% elseif theme.gitment %&#125;</div><div class="line">&lt;link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"&gt;</div><div class="line">&lt;script src="https://imsun.github.io/gitment/dist/gitment.browser.js"&gt;&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">  var gitment = new Gitment(&#123;</div><div class="line">    // 根据文章标题设置唯一评论id</div><div class="line">    id: '&#123;&#123;page.articleId&#125;&#125;',</div><div class="line">    owner: 'yourname',</div><div class="line">    repo: 'your blog github repo',</div><div class="line">    oauth: &#123;</div><div class="line">      client_id: 'your clientid',</div><div class="line">      client_secret: 'your clientsecret',</div><div class="line">    &#125;,</div><div class="line">  &#125;)</div><div class="line">  gitment.render('comments')</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>配置项的id若不设置的话，默认为 location.href，尝试过不设置该项，但若文章url含有hash #more 时，会拉取不到评论。</p>
+<h3 id="4-md文章下的配置"><a href="#4-md文章下的配置" class="headerlink" title="4. .md文章下的配置"></a>4. <code>.md</code>文章下的配置</h3><p>在头部添加下面代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">comments: <span class="keyword">true</span></div><div class="line"><span class="comment">/**</span></div><div class="line">  若comments.swig中的id没配置的话，忽略该项</div><div class="line">  注意这里的artile name是指你md文件的命名而不是文章标题</div><div class="line">**/</div><div class="line">articleId: your article.md<span class="string">'s name</span></div></pre></td></tr></table></figure></p>
+<p>以上，我们便搭建好了一个较为健全的博客空间～</p>
+<p><img src="http://oqwh8w9hs.bkt.clouddn.com/markdown-img-paste-20170605182754871.png" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/02/buildblog-1/" rel="next" title="小白的 Hexo + Github - 建站指引">
+                <i class="fa fa-chevron-left"></i> 小白的 Hexo + Github - 建站指引
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <style>
+      .gitment-container a:hover{
+        text-decoration: none;
+      }
+    </style>
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+      var gitment = new Gitment({
+        id: 'buildblog-2',
+        owner: 'yvonnevv',
+        repo: 'yvonnevv.github.io',
+        oauth: {
+          client_id: 'd9a9254eceded2237e25',
+          client_secret: '6f2d6f528121b88630fbaa03c1f8c7e6f9a0b204',
+        },
+      })
+      gitment.render('comments')
+    </script>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpeg"
+               alt="Yvonne Chen" />
+          <p class="site-author-name" itemprop="name">Yvonne Chen</p>
+           
+              <p class="site-description motion-element" itemprop="description">前端 设计 生活</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Atom-Markdown-优化插件"><span class="nav-number">1.</span> <span class="nav-text">Atom Markdown 优化插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-使用快捷键插入截图"><span class="nav-number">1.1.</span> <span class="nav-text">1. 使用快捷键插入截图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-其他优化markdown写作体验插件"><span class="nav-number">1.2.</span> <span class="nav-text">2. 其他优化markdown写作体验插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集成Gitment评论系统"><span class="nav-number">2.</span> <span class="nav-text">集成Gitment评论系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-注册-OAuth-Application"><span class="nav-number">2.1.</span> <span class="nav-text">1. 注册 OAuth Application</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-在配置文件添加gitment支持"><span class="nav-number">2.2.</span> <span class="nav-text">2. 在配置文件添加gitment支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-在comments文件中加入gitment配置"><span class="nav-number">2.3.</span> <span class="nav-text">3. 在comments文件中加入gitment配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-md文章下的配置"><span class="nav-number">2.4.</span> <span class="nav-text">4. .md文章下的配置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yvonne Chen</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

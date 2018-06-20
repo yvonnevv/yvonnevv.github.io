@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="最近用createjs完成了个H5需求，体验二维码如下。在音效接入方面踩了一点坑，但…庆幸的是，坑还是能被填上的。  本文能为你解决：  微信音频自动播放问题 audio预加载问题（解决网络环境差下，音频由于未缓冲完造成的音效动画不同步问题  微信环境下音频自动播放问题IOS设备系统是不允许视频音频自动播放的，需要用户明确指定播放（通过一定的交互动作），相关的音频或视频才能被加载。 解决（推荐使用">
+<meta name="description" content="最近用createjs完成了个H5需求，体验二维码如下。在音效接入方面踩了一点坑，但…庆幸的是，坑还是能被填上的。  本文能为你解决：  微信音频自动播放问题 audio预加载问题（解决网络环境差下，音频由于未缓冲完造成的音效动画不同步问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="H5音频踩坑与填坑">
 <meta property="og:url" content="http://yoursite.com/2017/09/08/audio/index.html">
 <meta property="og:site_name" content="Remixxx_">
-<meta property="og:description" content="最近用createjs完成了个H5需求，体验二维码如下。在音效接入方面踩了一点坑，但…庆幸的是，坑还是能被填上的。  本文能为你解决：  微信音频自动播放问题 audio预加载问题（解决网络环境差下，音频由于未缓冲完造成的音效动画不同步问题  微信环境下音频自动播放问题IOS设备系统是不允许视频音频自动播放的，需要用户明确指定播放（通过一定的交互动作），相关的音频或视频才能被加载。 解决（推荐使用">
+<meta property="og:description" content="最近用createjs完成了个H5需求，体验二维码如下。在音效接入方面踩了一点坑，但…庆幸的是，坑还是能被填上的。  本文能为你解决：  微信音频自动播放问题 audio预加载问题（解决网络环境差下，音频由于未缓冲完造成的音效动画不同步问题">
 <meta property="og:image" content="https://segmentfault.com/img/bVURYI?w=370&h=370">
 <meta property="og:image" content="https://segmentfault.com/img/bVUEKk?w=68&h=86">
-<meta property="og:updated_time" content="2018-06-20T08:45:07.858Z">
+<meta property="og:updated_time" content="2018-06-20T08:51:18.275Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="H5音频踩坑与填坑">
-<meta name="twitter:description" content="最近用createjs完成了个H5需求，体验二维码如下。在音效接入方面踩了一点坑，但…庆幸的是，坑还是能被填上的。  本文能为你解决：  微信音频自动播放问题 audio预加载问题（解决网络环境差下，音频由于未缓冲完造成的音效动画不同步问题  微信环境下音频自动播放问题IOS设备系统是不允许视频音频自动播放的，需要用户明确指定播放（通过一定的交互动作），相关的音频或视频才能被加载。 解决（推荐使用">
+<meta name="twitter:description" content="最近用createjs完成了个H5需求，体验二维码如下。在音效接入方面踩了一点坑，但…庆幸的是，坑还是能被填上的。  本文能为你解决：  微信音频自动播放问题 audio预加载问题（解决网络环境差下，音频由于未缓冲完造成的音效动画不同步问题">
 <meta name="twitter:image" content="https://segmentfault.com/img/bVURYI?w=370&h=370">
 
 
@@ -357,6 +357,7 @@
 <li>微信音频自动播放问题</li>
 <li>audio预加载问题（解决网络环境差下，音频由于未缓冲完造成的音效动画不同步问题</li>
 </ul>
+<a id="more"></a>
 <h2 id="微信环境下音频自动播放"><a href="#微信环境下音频自动播放" class="headerlink" title="微信环境下音频自动播放"></a>微信环境下音频自动播放</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>IOS设备系统是不允许视频音频自动播放的，需要用户明确指定播放（通过一定的交互动作），相关的音频或视频才能被加载。</p>
 <h3 id="解决（推荐使用方法一"><a href="#解决（推荐使用方法一" class="headerlink" title="解决（推荐使用方法一"></a>解决（推荐使用方法一</h3><p><strong>方法一</strong>：使用weixin提供的sdk</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">// 引入sdk</div><div class="line">&lt;script src=&quot;https://res.wx.qq.com/open/js/jweixin-1.0.0.js&quot;&gt;&lt;/script&gt;</div><div class="line"></div><div class="line">var audio = (function()&#123;</div><div class="line">  var _audio = new Audio();</div><div class="line">  _audio.src = &apos;xxx&apos;;</div><div class="line">  _audio.load();</div><div class="line">  return _audio;</div><div class="line">&#125;)()</div><div class="line"></div><div class="line">// 微信配置信息（即使不正确也没问题</div><div class="line">wx.config(&#123;</div><div class="line">  debug: false,</div><div class="line">  appId: &apos;&apos;,</div><div class="line">  timestamp: 1,</div><div class="line">  nonceStr: &apos;&apos;,</div><div class="line">  signature: &apos;&apos;,</div><div class="line">  jsApiList: []</div><div class="line">&#125;);</div><div class="line">// 在ready时触发相关事件</div><div class="line">wx.ready(function() &#123;</div><div class="line">  // 触发一下play事件</div><div class="line">  audio.play();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>

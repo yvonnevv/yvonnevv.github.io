@@ -1,0 +1,751 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="组内技术生态是React，参与使用React构建的大型项目也有几个了，趁着最近需求比较不饱和，来梳理一下常和React配套使用的数据流框架Redux的使用方法和内部原理。 阅读本文可以了解  redux基本使用 redux思想">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出Redux（一）：通俗理解Redux">
+<meta property="og:url" content="http://yoursite.com/2017/10/21/reduxcode-1/index.html">
+<meta property="og:site_name" content="Remixxx_">
+<meta property="og:description" content="组内技术生态是React，参与使用React构建的大型项目也有几个了，趁着最近需求比较不饱和，来梳理一下常和React配套使用的数据流框架Redux的使用方法和内部原理。 阅读本文可以了解  redux基本使用 redux思想">
+<meta property="og:image" content="http://oij3g11k9.bkt.clouddn.com/2018-06-21-19-38-41.png">
+<meta property="og:updated_time" content="2018-06-27T03:25:08.557Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入浅出Redux（一）：通俗理解Redux">
+<meta name="twitter:description" content="组内技术生态是React，参与使用React构建的大型项目也有几个了，趁着最近需求比较不饱和，来梳理一下常和React配套使用的数据流框架Redux的使用方法和内部原理。 阅读本文可以了解  redux基本使用 redux思想">
+<meta name="twitter:image" content="http://oij3g11k9.bkt.clouddn.com/2018-06-21-19-38-41.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/21/reduxcode-1/"/>
+
+
+
+
+
+  <title>深入浅出Redux（一）：通俗理解Redux | Remixxx_</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Remixxx_</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">May the force be with you</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/21/reduxcode-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yvonne Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Remixxx_">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入浅出Redux（一）：通俗理解Redux</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-21T00:00:00+08:00">
+                2017-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>组内技术生态是React，参与使用React构建的大型项目也有几个了，趁着最近需求比较不饱和，来梳理一下常和React配套使用的数据流框架Redux的使用方法和内部原理。</p>
+<p>阅读本文可以了解</p>
+<ol>
+<li>redux基本使用</li>
+<li>redux思想</li>
+</ol>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>首先来了解下Redux能为我们解决什么痛点。</p>
+<p>一般来说，如果我们一个小型应用，那么需要维护的状态（数据）可能只有几个，比如Todolist，需要关注的状态（数据）就只有<code>todolist</code>这个数组对象。数据间不需要多页面共享，这个时候在页面中直接定义<code>state</code>就行，根本没必要用上状态管理框架。</p>
+<p>而如果我们的应用相当复杂，比如购物商城这种，需要关注的状态可能有 用户信息/购物车 等，而且用户信息可能在多个页面都需要用到，这时候使用状态管理框架维护一套唯一的<code>State</code>就显得非常有必要了。</p>
+<p>对于不太了解Redux思想的前端（小白）ers来说，刚使用 Redux 的时候应该会感觉到不及 Vuex 易用。诚然，Redux里面有太多的新概念，比如<code>Store</code>/<code>Reducer</code>/<code>Action</code>/<code>Action creator</code>，并且上述的诸个概念在使用时又环环相扣，时常会让我们一头雾水。下文笔者会用相对于通俗的语言阐述下这几个概念以及用法。注意本文例子只使用纯 Redux 开发，暂不加入 react-redux 库和中间件。</p>
+<h2 id="Redux工作流"><a href="#Redux工作流" class="headerlink" title="Redux工作流"></a>Redux工作流</h2><ol>
+<li>创建唯一<code>Store</code>作为整个应用共享的状态（数据）</li>
+<li>创建改变<code>Store</code>的指令<code>Action</code>，注意<code>Action</code>只是对像</li>
+<li>使用<code>Reducer</code>（函数）改变<code>Store</code>，根据<code>Action</code>的<code>type</code>执行不同的操作</li>
+</ol>
+<p>所以Redux三大概念的实质即是</p>
+<ol>
+<li><code>Store</code>：数据对象</li>
+<li><code>Action</code>：指令对象</li>
+<li><code>Reducer</code>：纯函数</li>
+</ol>
+<blockquote>
+<p>而<code>Action creator</code>则是返回<code>Action</code>的函数，项目中一般是使用<code>Action creator</code>创建<code>Action</code>指令</p>
+</blockquote>
+<p>突然发现Redux的思想被三言两语解释完了。。想当初可是理解了好久。。再举一个生活中的例子解释吧。</p>
+<p>比如有一天你和小女友突然想玩玩过家家煮饭仔。<br>而家里有小白菜，鸡蛋。（相当于<code>Store</code>）小女友还想吃牛肉、茄子。<br>于是你：收到小女友指令：买牛肉/买茄子。（相当于<code>Action</code>）<br>然后你：1. 去了菜市场&gt;找到牛肉铺&gt;给钱&gt;买了牛肉&gt;回家（action.type === 买牛肉）2. 去了菜市场&gt;找到茄子铺&gt;给钱&gt;买了茄子&gt;回家（action.type === 买茄子）（相当于<code>Reducer</code>）</p>
+<p>这时候家里库存就多了牛肉、茄子两个菜品。成功完成了小女友指令～～</p>
+<p>现在估计对这三大概念就一定了解了，那我接着往深入讲。</p>
+<h2 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h2><p>现在通过一个demo来了解Redux的具体使用方法</p>
+<h3 id="1、创建store：createStore"><a href="#1、创建store：createStore" class="headerlink" title="1、创建store：createStore"></a>1、创建store：createStore</h3><p>相当简单，只是调用一个API的事，需要传入reducer函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">import &#123; createStore &#125; from &apos;redux&apos;</div><div class="line">import reducer from &apos;./reducer&apos;</div><div class="line"></div><div class="line">const store = createStore(reducer)</div><div class="line">export default store</div></pre></td></tr></table></figure>
+<h3 id="2、发出指令通知并执行相应reducer：dispatch"><a href="#2、发出指令通知并执行相应reducer：dispatch" class="headerlink" title="2、发出指令通知并执行相应reducer：dispatch"></a>2、发出指令通知并执行相应reducer：dispatch</h3><p>可以在View中绑定不同方法来发出指令告知<code>Store</code>执行<code>reducer</code>变更数据</p>
+<blockquote>
+<p>使用<code>store.dispatch(action)</code>通知<code>reducer</code>根据指令执行方法<br>注意这里Redux帮我们包装过，只需<code>dispath(action)</code>无需手动执行<code>reducer</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">// ./redux/action.js</div><div class="line"></div><div class="line">// 这里的方法即 Action Creator</div><div class="line">export const add = () =&gt; &#123;</div><div class="line">  // 返回一个 Action 对象</div><div class="line">  return &#123; type: &apos;add&apos; &#125;</div><div class="line">&#125;</div><div class="line">// 同上</div><div class="line">export const minus = () =&gt; &#123;</div><div class="line">  return &#123; type: &apos;minus&apos; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// App.js</div><div class="line"></div><div class="line">import store from &apos;./redux/store&apos;</div><div class="line">import &#123; add, minus &#125; from &apos;./redux/action&apos;</div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line">doAdd () &#123;</div><div class="line">  store.dispatch(add())</div><div class="line">&#125;</div><div class="line"></div><div class="line">doMinus () &#123;</div><div class="line">  store.dispatch(minus())</div><div class="line">&#125;</div><div class="line"></div><div class="line">...</div><div class="line">&lt;div&gt;&lt;button onClick=&#123;this.doAdd&#125;&gt;+&lt;/button&gt;&lt;button onClick=&#123;this.doMinus&#125;&gt;-&lt;/button&gt;&lt;/div&gt;</div><div class="line"></div><div class="line">// 看一眼具体的reducer</div><div class="line"></div><div class="line">const initState = &#123;</div><div class="line">  num: 0</div><div class="line">&#125;</div><div class="line">const count = (state = initState, action) =&gt; &#123;</div><div class="line">  switch (action.type) &#123;</div><div class="line">    case &apos;add&apos;:      </div><div class="line">      return &#123;</div><div class="line">        ...state,</div><div class="line">        num: ++state.num</div><div class="line">      &#125;</div><div class="line">    case &apos;minus&apos;:</div><div class="line">      return &#123;</div><div class="line">        ...state,</div><div class="line">        num: --state.num</div><div class="line">      &#125;</div><div class="line">    default: </div><div class="line">      return state</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default count</div></pre></td></tr></table></figure>
+<h3 id="3、更新视图：subscribe"><a href="#3、更新视图：subscribe" class="headerlink" title="3、更新视图：subscribe"></a>3、更新视图：subscribe</h3><p>执行了<code>store.dispatch(action)</code>之后，其实<code>Store</code>的数据已经更新了，那么怎么告知视图作出更新呢？Redux为我们提供了<code>subscribe</code>方法，<code>subscribe</code>可以在任意时刻为<code>Store</code>订阅<code>listener</code>，然后在<code>dispatch</code>时执行<code>listener</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">// App.js</div><div class="line"></div><div class="line">...</div><div class="line">componentDidMount () &#123;</div><div class="line">  store.subscribe(() =&gt; &#123;  </div><div class="line">    // 更新应用的state          </div><div class="line">    this.setState(&#123;</div><div class="line">      num: store.getState().num</div><div class="line">    &#125;)</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">...</div><div class="line">// state 改变会再次执行render函数，修改页面中绑定的`num`</div><div class="line">render() &#123;    </div><div class="line">  const &#123; num &#125; = this.state</div><div class="line">  return (</div><div class="line">    &lt;div className=&quot;App&quot;&gt;</div><div class="line">      &lt;div&gt;&#123;num&#125;&lt;/div&gt;</div><div class="line">      &lt;div&gt;&lt;button onClick=&#123;this.doAdd&#125;&gt;+&lt;/button&gt;&lt;button onClick=&#123;this.doMinus&#125;&gt;-&lt;/button&gt;&lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  )</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>于是。。深入浅出Redux第一篇就讲完了。。感谢阅读<br><img src="http://oij3g11k9.bkt.clouddn.com/2018-06-21-19-38-41.png" alt="2018-06-21-19-38-41"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/08/audio/" rel="next" title="H5音频踩坑与填坑">
+                <i class="fa fa-chevron-left"></i> H5音频踩坑与填坑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/22/reduxcode-2/" rel="prev" title="深入浅出Redux（二）：Redux源码梳理">
+                深入浅出Redux（二）：Redux源码梳理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <style>
+      .gitment-container a:hover{
+        text-decoration: none;
+      }
+    </style>
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+      var gitment = new Gitment({
+        id: 'reduxcode-1',
+        owner: 'yvonnevv',
+        repo: 'yvonnevv.github.io',
+        oauth: {
+          client_id: 'd9a9254eceded2237e25',
+          client_secret: '6f2d6f528121b88630fbaa03c1f8c7e6f9a0b204',
+        },
+      })
+      gitment.render('comments')
+    </script>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpeg"
+               alt="Yvonne Chen" />
+          <p class="site-author-name" itemprop="name">Yvonne Chen</p>
+           
+              <p class="site-description motion-element" itemprop="description">前端 设计 生活</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redux工作流"><span class="nav-number">2.</span> <span class="nav-text">Redux工作流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demo"><span class="nav-number">3.</span> <span class="nav-text">demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、创建store：createStore"><span class="nav-number">3.1.</span> <span class="nav-text">1、创建store：createStore</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、发出指令通知并执行相应reducer：dispatch"><span class="nav-number">3.2.</span> <span class="nav-text">2、发出指令通知并执行相应reducer：dispatch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、更新视图：subscribe"><span class="nav-number">3.3.</span> <span class="nav-text">3、更新视图：subscribe</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yvonne Chen</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
